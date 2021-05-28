@@ -2,3 +2,7 @@
 nanodet-threads.*
 /ncnn-20210519-webassembly
 ncnn-20210519-webassembly.zip
+/nanodet.sim.onnx
+/nanodet.sim.param
+/nanodet.onnx
+/nanodet.sim.bin

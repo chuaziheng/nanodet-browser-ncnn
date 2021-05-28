@@ -7,20 +7,25 @@ Adapted from: https://github.com/nihui/ncnn-webassembly-nanodet
 
 1. Convert pytorch (.pth) to .onnx (Using insert/nanodet/repo)
 ```
-python tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+python export_onnx.py --cfg_path config/nanodet-m.yml --model_path models/nanodet_usethis.pth
 ```
 
 2. Simplify onnx file https://github.com/daquexian/onnx-simplifier
 ```
 pip install onnx-simplifier
 
-python -m onnxsim {INPUT_ONNX_MODEL} {OUTPUT_ONNX_MODEL}
+python -m onnxsim nanodet.onnx nanodet.sim.onnx
 ```
 
-3. Convert .onnx into NCNN model format (.bin and .param) https://convertmodel.com/
+3. Convert .onnx into NCNN model format (.bin and .param)  https://blog.csdn.net/xiao13mm/article/details/106165477
 
-4. Place .bin and .param files into ``` /assets ```. Take note: remove the ```zone-identifier``` files
-https://github.com/nihui/ncnn-webassembly-nanodet
+```
+./ncnn/build/tools/onnx/onnx2ncnn nanodet.sim.onnx nanodet.sim.param nanodet.sim.bin
+```
+
+
+4. Place .bin and .param files into ``` /assets ```. 
+    https://github.com/nihui/ncnn-webassembly-nanodet
 
 5. [For first time] Install Emscripten (skip to step 8 if already installed)
 ```

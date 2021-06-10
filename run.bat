@@ -1,1 +1,0 @@
-docker run -it -v  %cd%:/usr/src/app a2f719a7e151

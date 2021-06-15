@@ -42,11 +42,12 @@ RUN git clone https://github.com/emscripten-core/emsdk.git
 # COPY install.sh/ install.sh
 # COPY convert.sh/ convert.sh
 COPY nanodet/ /usr/src/app/nanodet/
-# COPY ncnn/ /usr/src/app/ncnn
+COPY nanodet.cpp /usr/src/app/nanodet.cpp
+COPY nanodet.h /usr/src/app/nanodet.h
+COPY nanodetncnn.cpp /usr/src/app/nanodetncnn.cpp
 
-# COPY . .
-# # CMD [ "python3", "test.py" ]
-# CMD [ "./convert.sh" ]
+# Dev Debugging purposes
+RUN apt-get -y install vim
 
 # ENTRYPOINT ["sh", "./install.sh"]
 COPY install.sh/ install.sh

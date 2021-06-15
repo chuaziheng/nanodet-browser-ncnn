@@ -81,7 +81,7 @@ static void on_image_render(cv::Mat& rgba)
         static const float mean_vals[3] = {103.53f, 116.28f, 123.675f};
         static const float norm_vals[3] = {1.f / 57.375f, 1.f / 57.12f, 1.f / 58.395f};
 
-        g_nanodet->load("m", 320, mean_vals, norm_vals);
+        g_nanodet->load("m", 320, mean_vals, norm_vals);  // Edit this
     }
 
     std::vector<Object> objects;

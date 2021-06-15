@@ -190,10 +190,10 @@ ConvolutionDepthWise Conv_457                 1 1 935 1167 0=96 1=3 11=3 2=1 12=
 ReLU             LeakyRelu_458            1 1 1167 938 0=1.000000e-01
 Convolution      Conv_459                 1 1 938 1170 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9216
 ReLU             LeakyRelu_460            1 1 1170 941 0=1.000000e-01
-Convolution      Conv_461                 1 1 941 942 0=35 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3360
-Slice            Split_462                1 2 942 943 944 -23300=2,3,-233 1=0
+Convolution      Conv_461                 1 1 941 942 0=33 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3168
+Slice            Split_462                1 2 942 943 944 -23300=2,1,-233 1=0
 Sigmoid          Sigmoid_463              1 1 943 945
-Reshape          Reshape_465              1 1 945 947 0=-1 1=3
+Reshape          Reshape_465              1 1 945 947 0=-1 1=1
 Permute          Transpose_466            1 1 947 cls_pred_stride_8 0=1
 Reshape          Reshape_468              1 1 944 950 0=-1 1=32
 Permute          Transpose_469            1 1 950 dis_pred_stride_8 0=1
@@ -205,10 +205,10 @@ ConvolutionDepthWise Conv_474                 1 1 957 1179 0=96 1=3 11=3 2=1 12=
 ReLU             LeakyRelu_475            1 1 1179 960 0=1.000000e-01
 Convolution      Conv_476                 1 1 960 1182 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9216
 ReLU             LeakyRelu_477            1 1 1182 963 0=1.000000e-01
-Convolution      Conv_478                 1 1 963 964 0=35 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3360
-Slice            Split_479                1 2 964 965 966 -23300=2,3,-233 1=0
+Convolution      Conv_478                 1 1 963 964 0=33 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3168
+Slice            Split_479                1 2 964 965 966 -23300=2,1,-233 1=0
 Sigmoid          Sigmoid_480              1 1 965 967
-Reshape          Reshape_482              1 1 967 969 0=-1 1=3
+Reshape          Reshape_482              1 1 967 969 0=-1 1=1
 Permute          Transpose_483            1 1 969 cls_pred_stride_16 0=1
 Reshape          Reshape_485              1 1 966 972 0=-1 1=32
 Permute          Transpose_486            1 1 972 dis_pred_stride_16 0=1
@@ -220,10 +220,10 @@ ConvolutionDepthWise Conv_491                 1 1 979 1191 0=96 1=3 11=3 2=1 12=
 ReLU             LeakyRelu_492            1 1 1191 982 0=1.000000e-01
 Convolution      Conv_493                 1 1 982 1194 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9216
 ReLU             LeakyRelu_494            1 1 1194 985 0=1.000000e-01
-Convolution      Conv_495                 1 1 985 986 0=35 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3360
-Slice            Split_496                1 2 986 987 988 -23300=2,3,-233 1=0
+Convolution      Conv_495                 1 1 985 986 0=33 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3168
+Slice            Split_496                1 2 986 987 988 -23300=2,1,-233 1=0
 Sigmoid          Sigmoid_497              1 1 987 989
-Reshape          Reshape_499              1 1 989 991 0=-1 1=3
+Reshape          Reshape_499              1 1 989 991 0=-1 1=1
 Permute          Transpose_500            1 1 991 cls_pred_stride_32 0=1
 Reshape          Reshape_502              1 1 988 994 0=-1 1=32
 Permute          Transpose_503            1 1 994 dis_pred_stride_32 0=1

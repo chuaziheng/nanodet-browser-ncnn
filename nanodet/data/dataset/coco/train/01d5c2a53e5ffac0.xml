@@ -1,0 +1,26 @@
+<annotation>
+  <folder>images</folder>
+  <filename>01d5c2a53e5ffac0.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\data\dataset\googleOI_dataset\human hand\images\01d5c2a53e5ffac0.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>1024</width>
+    <height>680</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>449</xmin>
+      <xmax>610</xmax>
+      <ymin>525</ymin>
+      <ymax>663</ymax>
+    </bndbox>
+  </object>
+</annotation>

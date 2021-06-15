@@ -1,0 +1,26 @@
+<annotation>
+  <folder>images</folder>
+  <filename>58986d0aeb7109a9.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\data\dataset\googleOI_dataset\watch\images\58986d0aeb7109a9.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>674</width>
+    <height>1024</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>watch</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>259</xmin>
+      <xmax>655</xmax>
+      <ymin>117</ymin>
+      <ymax>608</ymax>
+    </bndbox>
+  </object>
+</annotation>

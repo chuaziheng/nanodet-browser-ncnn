@@ -1,0 +1,38 @@
+<annotation>
+  <folder>images</folder>
+  <filename>00f3150ad00889f7.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\nanodet\data\dataset\simple_data\computer mouse\images\00f3150ad00889f7.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>577</width>
+    <height>1024</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>computer mouse123</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>78</xmin>
+      <xmax>160</xmax>
+      <ymin>644</ymin>
+      <ymax>696</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>computer mouse123</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>400</xmin>
+      <xmax>477</xmax>
+      <ymin>630</ymin>
+      <ymax>672</ymax>
+    </bndbox>
+  </object>
+</annotation>

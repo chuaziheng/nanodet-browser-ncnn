@@ -1,0 +1,26 @@
+<annotation>
+  <folder>images</folder>
+  <filename>0000b9115cdf1e54.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\nanodet\data\dataset\simple_data\mobile phone\images\0000b9115cdf1e54.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>1024</width>
+    <height>768</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>mobile phone123</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>97</xmin>
+      <xmax>723</xmax>
+      <ymin>382</ymin>
+      <ymax>729</ymax>
+    </bndbox>
+  </object>
+</annotation>

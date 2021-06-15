@@ -1,0 +1,62 @@
+<annotation>
+  <folder>images</folder>
+  <filename>01b84a247ff748e3.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\data\dataset\googleOI_dataset\human hand\images\01b84a247ff748e3.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>1024</width>
+    <height>683</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>390</xmin>
+      <xmax>482</xmax>
+      <ymin>260</ymin>
+      <ymax>334</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>176</xmin>
+      <xmax>201</xmax>
+      <ymin>328</ymin>
+      <ymax>356</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>679</xmin>
+      <xmax>717</xmax>
+      <ymin>304</ymin>
+      <ymax>344</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>784</xmin>
+      <xmax>822</xmax>
+      <ymin>271</ymin>
+      <ymax>326</ymax>
+    </bndbox>
+  </object>
+</annotation>

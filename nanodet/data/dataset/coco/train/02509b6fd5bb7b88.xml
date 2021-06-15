@@ -1,0 +1,98 @@
+<annotation>
+  <folder>images</folder>
+  <filename>02509b6fd5bb7b88.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\data\dataset\googleOI_dataset\human hand\images\02509b6fd5bb7b88.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>681</width>
+    <height>1024</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>33</xmin>
+      <xmax>63</xmax>
+      <ymin>590</ymin>
+      <ymax>624</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>95</xmin>
+      <xmax>141</xmax>
+      <ymin>573</ymin>
+      <ymax>605</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>236</xmin>
+      <xmax>274</xmax>
+      <ymin>632</ymin>
+      <ymax>660</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>274</xmin>
+      <xmax>308</xmax>
+      <ymin>641</ymin>
+      <ymax>666</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>427</xmin>
+      <xmax>486</xmax>
+      <ymin>539</ymin>
+      <ymax>586</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>492</xmin>
+      <xmax>543</xmax>
+      <ymin>541</ymin>
+      <ymax>594</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>human hand</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>645</xmin>
+      <xmax>678</xmax>
+      <ymin>611</ymin>
+      <ymax>651</ymax>
+    </bndbox>
+  </object>
+</annotation>

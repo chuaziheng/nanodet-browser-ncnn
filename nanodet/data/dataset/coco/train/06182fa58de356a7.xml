@@ -1,0 +1,26 @@
+<annotation>
+  <folder>images</folder>
+  <filename>06182fa58de356a7.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\data\dataset\googleOI_dataset\mobile phone\images\06182fa58de356a7.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>891</width>
+    <height>1024</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>mobile phone</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>273</xmin>
+      <xmax>649</xmax>
+      <ymin>142</ymin>
+      <ymax>883</ymax>
+    </bndbox>
+  </object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+  <folder>images</folder>
+  <filename>00003223e04e2e66.jpg</filename>
+  <path>C:\Users\chuaz\test-videoio\nanodet\nanodet\data\dataset\simple_data\person\images\00003223e04e2e66.jpg</path>
+  <source>
+    <database>OpenImages</database>
+  </source>
+  <size>
+    <width>768</width>
+    <height>1024</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>person123</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>373</xmin>
+      <xmax>480</xmax>
+      <ymin>625</ymin>
+      <ymax>833</ymax>
+    </bndbox>
+  </object>
+</annotation>

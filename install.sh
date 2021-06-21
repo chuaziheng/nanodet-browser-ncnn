@@ -17,7 +17,7 @@ rm -rf ./assets/
 mkdir assets
 
 echo "converting into onnx ..."
-python3 ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m.yml --model_path ./models/model_hands.pth
+python3 ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m.yml --model_path ./models/nanodetmodel.pth
 
 echo "simplifying onnx ..."
 python3 -m onnxsim nanodet.onnx nanodet_simple.onnx

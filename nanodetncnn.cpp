@@ -72,7 +72,7 @@ static int draw_fps(cv::Mat& rgba)
 
 static NanoDet* g_nanodet = 0;
 
-static void on_image_render(cv::Mat& rgba)
+static void on_image_render(cv::Mat& rgba)  // takes in a frame (2)
 {
     if (!g_nanodet)
     {
@@ -80,8 +80,9 @@ static void on_image_render(cv::Mat& rgba)
 
         static const float mean_vals[3] = {103.53f, 116.28f, 123.675f};
         static const float norm_vals[3] = {1.f / 57.375f, 1.f / 57.12f, 1.f / 58.395f};
-
-        g_nanodet->load("m", 320, mean_vals, norm_vals);  // Edit this
+        std::cout<< "loading model" << std::endl;
+        g_nanodet->load("custom", 320, mean_vals, norm_vals);  // calls nanodet.cpp to load model
+        std::cout<< "after loading model" << std::endl;
     }
 
     std::vector<Object> objects;
@@ -116,7 +117,7 @@ static void worker()
 
         cv::Mat rgba(h, w, CV_8UC4, (void*)rgba_data);
 
-        on_image_render(rgba);
+        on_image_render(rgba);  // ENTER FROM HERE
 
         rgba_data = 0;
 
@@ -164,10 +165,10 @@ void nanodet_ncnn(unsigned char* _rgba_data, int _w, int _h)
 
 extern "C" {
 
-void nanodet_ncnn(unsigned char* rgba_data, int w, int h)
+void nanodet_ncnn(unsigned char* rgba_data, int w, int h)  // ENTRY POINT OF SCRIPT (1)
 {
     cv::Mat rgba(h, w, CV_8UC4, (void*)rgba_data);
-
+    // std::cout << "here" ;
     on_image_render(rgba);
 }
 

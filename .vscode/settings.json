@@ -4,6 +4,7 @@
 		"__config": "cpp",
 		"atomic": "cpp",
 		"*.inc": "cpp",
-		"memory_resource": "cpp"
+		"memory_resource": "cpp",
+		"ostream": "cpp"
 	}
 }

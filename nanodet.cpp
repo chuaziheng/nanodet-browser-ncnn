@@ -17,6 +17,7 @@
 #include <float.h>
 #include <cpu.h>
 #include <simpleocv.h>
+#include <iostream>
 
 static inline float intersection_area(const Object& a, const Object& b)
 {
@@ -231,6 +232,8 @@ int NanoDet::load(const char* modeltype, int _target_size, const float* _mean_va
     char modelpath[256];
     sprintf(parampath, "nanodet-%s.param", modeltype);
     sprintf(modelpath, "nanodet-%s.bin", modeltype);
+    std::cout << "param path: " << parampath ;
+    std::cout << "model path: " << modelpath ;
 
     nanodet.load_param(parampath);
     nanodet.load_model(modelpath);
@@ -412,9 +415,12 @@ int NanoDet::draw(cv::Mat& rgba, const std::vector<Object>& objects)
     for (size_t i = 0; i < objects.size(); i++)
     {
         const Object& obj = objects[i];
-
+        char buffer[256];
 //         fprintf(stderr, "%d = %.5f at %.2f %.2f %.2f x %.2f\n", obj.label, obj.prob,
 //                 obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height);
+        sprintf(buffer, " %d %f %f %f %f %f",  (obj.label + 1),  obj.prob, obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height);
+
+        std::cout << buffer << std::endl; // will be passed to nanodet-simd-threads.js
 
         const unsigned char* color = colors[color_index % 19];
         color_index++;

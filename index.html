@@ -183,17 +183,17 @@
                 });
         }
 
-
+        // TODO: write custom js function that calls this
         function ncnn_nanodet() {
-            var canvas = document.getElementById('canvas');
+            var canvas = document.getElementById('canvas');  //
             var ctx = canvas.getContext('2d');
 
             var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             var data = imageData.data;
 
             HEAPU8.set(data, dst);
-
-            _nanodet_ncnn(dst, canvas.width, canvas.height);
+            // rgba_data,w ,h
+            _nanodet_ncnn(dst, canvas.width, canvas.height);  // extern from nanodetncnn.cpp
 
             var result = HEAPU8.subarray(dst, dst + data.length);
             imageData.data.set(result);
@@ -202,14 +202,14 @@
 
         //Request Animation Frame function
         var sFilter = function () {
-            if (video.paused || video.ended) return;
+            if (video.paused || video.ended) return;  // end condition
 
             ctx.fillRect(0, 0, w, h);
             ctx.drawImage(video, 0, 0, w, h);
 
             ncnn_nanodet();
 
-            window.requestAnimationFrame(sFilter);
+            window.requestAnimationFrame(sFilter);  // infinite loop
         }
     </script>
 

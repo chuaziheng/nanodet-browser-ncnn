@@ -32,7 +32,11 @@ public:
 
     int load(const char* modeltype, int target_size, const float* mean_vals, const float* norm_vals, bool use_gpu = false);
 
-    int detect(const cv::Mat& rgba, std::vector<Object>& objects, float prob_threshold = 0.5f, float nms_threshold = 0.5f);  //----------------------------- EDIT THIS ----------------------------
+//----------------------------- EDIT Confidence and NMS threshold ------------------------------------------------------------------------------------------------
+
+    int detect(const cv::Mat& rgba, std::vector<Object>& objects, float prob_threshold = 0.5f, float nms_threshold = 0.5f);
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     int draw(cv::Mat& rgba, const std::vector<Object>& objects);
 

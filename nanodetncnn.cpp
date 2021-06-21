@@ -15,7 +15,7 @@
 #include <benchmark.h>
 #include <simpleocv.h>
 #include "nanodet.h"
-
+#include <iostream>
 static int draw_fps(cv::Mat& rgba)
 {
     // resolve moving average
@@ -86,7 +86,7 @@ static void on_image_render(cv::Mat& rgba)
 
     std::vector<Object> objects;
     g_nanodet->detect(rgba, objects);
-
+    // std::cout << "This should appear in the browser console" << std::endl; // will be passed to nanodet-simd-threads.js
     g_nanodet->draw(rgba, objects);
 
     draw_fps(rgba);

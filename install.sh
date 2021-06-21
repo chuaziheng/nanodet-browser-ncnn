@@ -38,6 +38,7 @@ wget https://github.com/nihui/ncnn/releases/download/20210519/ncnn-20210519-weba
 unzip ncnn-20210519-webassembly.zip
 
 echo "building wasm..."
+. "/usr/src/app/emsdk/emsdk_env.sh"
 mkdir build
 cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DWASM_FEATURE=basic ..

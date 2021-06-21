@@ -69,8 +69,8 @@
 
                 console.log('load ' + nanodet_module_name);
 
-                var nanodetwasm =   nanodet_module_name + '.wasm';
-                var nanodetjs = nanodet_module_name + '.js';
+                var nanodetwasm = './build/'+  nanodet_module_name + '.wasm';
+                var nanodetjs = './build/'+ nanodet_module_name + '.js'; // nanodet_module_name = anodet-simd-threads
 
                 fetch(nanodetwasm)
                     .then(response => response.arrayBuffer())

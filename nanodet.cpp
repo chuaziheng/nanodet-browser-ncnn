@@ -232,8 +232,8 @@ int NanoDet::load(const char* modeltype, int _target_size, const float* _mean_va
     char modelpath[256];
     sprintf(parampath, "nanodet-%s.param", modeltype);
     sprintf(modelpath, "nanodet-%s.bin", modeltype);
-    std::cout << "param path: " << parampath ;
-    std::cout << "model path: " << modelpath ;
+    // std::cout << "param path: " << parampath ;
+    // std::cout << "model path: " << modelpath ;
 
     nanodet.load_param(parampath);
     nanodet.load_model(modelpath);

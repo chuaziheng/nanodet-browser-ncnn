@@ -17,3 +17,15 @@ docker build -t ncnn-browser .
 ```
 docker run -dit -p 8080:8080 --name ncnn-browser --mount type=bind,source="$(pwd)"/models,target=/usr/src/app/models  --rm ncnn-browser
 ```
+
+
+
+KIV:
+
+```
+python ./tools/export.py --cfg_path ./config/nanodet-m.yml --model_path ../models/nanodetmodel.pth --out_path ../nanodet_m.onnx
+cd ..
+python -m onnxsim nanodet_m.onnx nanodet_m-simplified.onnx
+onnx-tf convert --infile nanodet_m-simplified.onnx --outdir models/saved-m
+tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/saved-m models/graph-m
+```

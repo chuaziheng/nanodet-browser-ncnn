@@ -6,10 +6,9 @@
     <title>ncnn webassembly nanodet</title>
     <style>
         video {
-            /*             position: absolute; */
-            /*             visibility: hidden; */
+/*             position: absolute; */
+/*             visibility: hidden; */
         }
-
         canvas {
             border: 1px solid black;
         }
@@ -40,7 +39,7 @@
         var wasmModuleLoaded = false;
         var wasmModuleLoadedCallbacks = [];
 
-        Module.onRuntimeInitialized = function () {
+        Module.onRuntimeInitialized = function() {
             wasmModuleLoaded = true;
             for (var i = 0; i < wasmModuleLoadedCallbacks.length; i++) {
                 wasmModuleLoadedCallbacks[i]();
@@ -53,24 +52,33 @@
             wasmFeatureDetect.threads().then(threadsSupported => {
                 has_threads = threadsSupported;
 
-                if (has_simd) {
-                    if (has_threads) {
+                if (has_simd)
+                {
+                    if (has_threads)
+                    {
                         nanodet_module_name = 'nanodet-simd-threads';
-                    } else {
+                    }
+                    else
+                    {
                         nanodet_module_name = 'nanodet-simd';
                     }
-                } else {
-                    if (has_threads) {
+                }
+                else
+                {
+                    if (has_threads)
+                    {
                         nanodet_module_name = 'nanodet-threads';
-                    } else {
+                    }
+                    else
+                    {
                         nanodet_module_name = 'nanodet-basic';
                     }
                 }
 
                 console.log('load ' + nanodet_module_name);
 
-                var nanodetwasm = './build/'+  nanodet_module_name + '.wasm';
-                var nanodetjs = './build/'+ nanodet_module_name + '.js'; // nanodet_module_name = anodet-simd-threads
+                var nanodetwasm = './build/' + nanodet_module_name + '.wasm';
+                var nanodetjs = './build/' + nanodet_module_name + '.js';
 
                 fetch(nanodetwasm)
                     .then(response => response.arrayBuffer())
@@ -78,7 +86,7 @@
                         Module.wasmBinary = buffer;
                         var script = document.createElement('script');
                         script.src = nanodetjs;
-                        script.onload = function () {
+                        script.onload = function() {
                             console.log('Emscripten boilerplate loaded.');
                         }
                         document.body.appendChild(script);
@@ -95,7 +103,7 @@
         var dst = null;
         var resultarray = null;
         var resultbuffer = null;
-        window.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('DOMContentLoaded', function() {
             var isStreaming = false;
             switchcamerabtn = document.getElementById('switch-camera-btn');
             video = document.getElementById('video');
@@ -103,7 +111,7 @@
             ctx = canvas.getContext('2d');
 
             // Wait until the video stream canvas play
-            video.addEventListener('canplay', function (e) {
+            video.addEventListener('canplay', function(e) {
                 if (!isStreaming) {
                     // videoWidth isn't always set correctly in all browsers
                     if (video.videoWidth > 0) h = video.videoHeight / (video.videoWidth / w);
@@ -114,7 +122,7 @@
             }, false);
 
             // Wait for the video to start to play
-            video.addEventListener('play', function () {
+            video.addEventListener('play', function() {
                 //Setup image memory
                 var id = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 var d = id.data;
@@ -126,7 +134,8 @@
                 }
 
                 function mallocAndCallSFilter() {
-                    if (dst != null) {
+                    if (dst != null)
+                    {
                         _free(dst);
                         dst = null;
                     }
@@ -145,7 +154,7 @@
                 switchcamerabtn.disabled = false;
             }
 
-            switchcamerabtn.addEventListener('click', function () {
+            switchcamerabtn.addEventListener('click', function() {
                 if (stream == null)
                     return
 
@@ -161,39 +170,32 @@
         });
 
         function capture() {
-            var constraints = {
-                audio: false,
-                video: {
-                    width: 640,
-                    height: 480,
-                    facingMode: shouldFaceUser ? 'user' : 'environment'
-                }
-            };
+            var constraints = { audio: false, video: { width: 640, height: 480, facingMode: shouldFaceUser ? 'user' : 'environment' } };
             navigator.mediaDevices.getUserMedia(constraints)
-                .then(function (mediaStream) {
+                .then(function(mediaStream) {
                     var video = document.querySelector('video');
                     stream = mediaStream;
                     video.srcObject = mediaStream;
-                    video.onloadedmetadata = function (e) {
+                    video.onloadedmetadata = function(e) {
                         video.play();
                     };
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     console.log(err.message);
                 });
         }
 
-        // TODO: write custom js function that calls this
+
         function ncnn_nanodet() {
-            var canvas = document.getElementById('canvas');  //
+            var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
 
             var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             var data = imageData.data;
 
             HEAPU8.set(data, dst);
-            // rgba_data,w ,h
-            _nanodet_ncnn(dst, canvas.width, canvas.height);  // extern from nanodetncnn.cpp
+
+            _nanodet_ncnn(dst, canvas.width, canvas.height);
 
             var result = HEAPU8.subarray(dst, dst + data.length);
             imageData.data.set(result);
@@ -201,16 +203,17 @@
         }
 
         //Request Animation Frame function
-        var sFilter = function () {
-            if (video.paused || video.ended) return;  // end condition
+        var sFilter = function() {
+            if (video.paused || video.ended) return;
 
             ctx.fillRect(0, 0, w, h);
             ctx.drawImage(video, 0, 0, w, h);
 
             ncnn_nanodet();
 
-            window.requestAnimationFrame(sFilter);  // infinite loop
+            window.requestAnimationFrame(sFilter);
         }
+
     </script>
 
 </body>

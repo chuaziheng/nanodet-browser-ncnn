@@ -20,12 +20,14 @@ docker run -dit -p 8080:8080 --name ncnn-browser --mount type=bind,source="$(pwd
 
 
 
-KIV:
+## PyTorch to Tensorflow-JS
 
 ```
-python ./tools/export.py --cfg_path ./config/nanodet-m.yml --model_path ../models/nanodetmodel.pth --out_path ../nanodet_m.onnx
-cd ..
-python -m onnxsim nanodet_m.onnx nanodet_m-simplified.onnx
-onnx-tf convert --infile nanodet_m-simplified.onnx --outdir models/saved-m
+python ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m.yml --model_path ./models/nanodetmodel.pth --out_path ./onnx_models/nanodet_10.onnx
+
+python -m onnxsim ./onnx_models/nanodet_10.onnx ./onnx_models/nanodet_10-simplified.onnx
+
+onnx-tf convert --infile ./onnx_models/nanodet_10-simplified.onnx --outdir models/saved-m
+
 tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/saved-m models/graph-m
 ```

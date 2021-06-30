@@ -6,13 +6,23 @@ const tf = require('@tensorflow/tfjs-node');
 const canvas = require('canvas');
 
 const modelOptions = {
-  modelPath: 'file://models/graph-m/model.json',
+  // modelPath: 'file://models/graph-m/model.json',
+  modelPath: 'file://models/graph-m-ckpt/model.json',
   minScore: 0.15, // low confidence, but still remove irrelevant
   iouThreshold: 0.5, // be very aggressive with removing overlapped boxes
   maxResults: 10, // high number of results, but likely never reached
   scaleBox: 2.5, // increase box size
   // eslint-disable-next-line max-len
-  labels: ['hands'],
+  // labels: ['hands'],
+  labels: [ "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
+  "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
+  "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+  "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
+  "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
+  "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
+  "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
+  "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
+  "hair drier", "toothbrush"]
 };
 
 // save image with processed results
@@ -73,9 +83,9 @@ async function processResults(res, inputSize, outputShape) {
       const baseSize = strideSize * 13; // 13x13=169, 26x26=676, 52x52=2704
       // find boxes and scores output depending on stride
       // log.info('Variation:', strideSize, 'strides', baseSize, 'baseSize');
-      const scores = res.find((a) => (a.shape[1] === (baseSize ** 2) && a.shape[2] === 80))?.squeeze();
+      const scores = res.find((a) => (a.shape[1] === (baseSize ** 2) && a.shape[2] === 1))?.squeeze();
       const features = res.find((a) => (a.shape[1] === (baseSize ** 2) && a.shape[2] === 32))?.squeeze();
-      log.info()
+      log.info('features', features);
       log.state('Found features tensor:', features?.shape);
       log.state('Found scores tensor:', scores?.shape);
       const scoreIdx = scores.argMax(1).dataSync(); // location of highest scores
@@ -146,7 +156,7 @@ async function main() {
 
   // load model
   const model = await tf.loadGraphModel(modelOptions.modelPath);
-  // log.info('Model signature:', model.modelSignature);
+  log.info('Model signature:', model.modelSignature);
   log.info('Loaded model', modelOptions, 'tensors:', tf.engine().memory().numTensors, 'bytes:', tf.engine().memory().numBytes);
 
   // load image and get approprite tensor for it
@@ -158,11 +168,13 @@ async function main() {
   }
   const img = loadImage(imageFile, inputSize);
   // log.info("################ img ", img.tensor.print());  // tensor exists
+  // console.log('####')
+  // console.log(img.tensor.print())
   log.info('Loaded image:', img.fileName, 'inputShape:', img.inputShape, 'outputShape:', img.outputShape);
 
   // run actual prediction
   const res = model.predict(img.tensor);
-  // log.info("-------------------res ---------------", res[0].print());  // tensor exists
+  log.info("-------------------res ---------------", res);  // tensor exists
   // process results
   const results = await processResults(res, inputSize, img.inputShape);
 

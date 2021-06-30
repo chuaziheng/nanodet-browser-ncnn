@@ -9,4 +9,4 @@ python3 -m onnxsim nanodet.onnx nanodet_simple.onnx
 echo "generating NCNN format..."
 cd ./ncnn/build/tools/onnx/ && ./onnx2ncnn.exe ../../../../nanodet_simple.onnx ../../../../assets/nanodet-m.param ../../../../assets/nanodet-m.bin
 
-
+cd ../../../..

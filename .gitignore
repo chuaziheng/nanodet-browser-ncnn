@@ -14,3 +14,7 @@ nanodet_simple.onnx
 
 old_readme.md
 /img
+/onnx_models
+/workspace
+/nanodet/workspace
+onnx2tf.py

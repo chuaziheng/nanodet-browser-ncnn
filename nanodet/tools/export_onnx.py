@@ -17,7 +17,6 @@ def main(config, model_path, output_path, input_shape=(320, 320)):
     logger = Logger(-1, config.save_dir, False)
     model = build_model(config.model)
     checkpoint = torch.load(model_path, map_location=lambda storage, loc: storage)
-    print(f"-----------model path {model_path}")
     load_model_weight(model, checkpoint, logger)
     if config.model.arch.backbone.name == 'RepVGG':
         deploy_config = config.model
@@ -75,5 +74,7 @@ if __name__ == '__main__':
         assert len(input_shape) == 2
     if model_path is None:
         model_path = os.path.join(cfg.save_dir, "model_best/model_best.ckpt")
+    # print(f'cfg {cfg} model_path {model_path}, out_path {out_path}, input_shape {input_shape}')
+    # exit()
     main(cfg, model_path, out_path, input_shape)
     print("Model saved to:", out_path)

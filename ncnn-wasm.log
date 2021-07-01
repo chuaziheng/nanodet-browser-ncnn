@@ -1,23 +1,4 @@
-require.js:1 Failed to load resource: the server responded with a status of 404 (Not Found)
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-[Deprecation] SharedArrayBuffer will require cross-origin isolation as of M92, around July 2021. See <URL> for more details.
-(index):104 load nanodet-simd-threads
-(index):158 0.jpg
-(index):225 Uncaught ReferenceError: switchcamerabtn is not defined
-    at (index):225
-(index):116 Emscripten boilerplate loaded.
-:8080/favicon.ico:1 Failed to load resource: the server responded with a status of 404 (Not Found)
-nanodet-simd-threads.js:1 Blocking on the main thread is very dangerous, see https://emscripten.org/docs/porting/pthreads.html#blocking-on-the-main-browser-thread
-warnOnce @ nanodet-simd-threads.js:1
-nanodet-simd-threads.js:1 loading model
-nanodet-simd-threads.js:1 after loading model
+
 nanodet-simd-threads.js:1  1 0.527860 0.748886 332.554932 153.610901 89.367645
 nanodet-simd-threads.js:1  1 0.527860 0.748886 332.554932 153.610901 89.367645
 (index):158 1.jpg

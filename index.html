@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="require.js"></script>
+
     <title>ncnn webassembly nanodet</title>
     <style>
         video {
@@ -20,13 +22,14 @@
     <div>
         <h1>ncnn webassembly nanodet</h1>
         <div>
-            <button disabled id="switch-camera-btn" style="height:48px">Switch Camera</button>
+            <!-- <button disabled id="switch-camera-btn" style="height:48px">Switch Camera</button> -->
         </div>
         <div>
             <canvas id="canvas" width="640"></canvas>
         </div>
         <!-- <video id="video" playsinline autoplay></video> -->
-        <img id="img" src='./testimg.jpg'></video>
+        <!-- <img id="img" src='./testimg.jpg'></video> -->
+        <img id="img" src=''/>
         <!-- <div class="container">
             <form method="post" action="" enctype="multipart/form-data" id="myform">
                 <div class='preview'>
@@ -53,6 +56,7 @@
     <script src="wasmFeatureDetect.js"></script>
 
     <script type='text/javascript'>
+
         var Module = {};
 
         var has_simd;
@@ -128,11 +132,55 @@
         window.addEventListener('DOMContentLoaded', function() {
             // var isStreaming = false;
             // switchcamerabtn = document.getElementById('switch-camera-btn');
-            myimg = document.getElementById('img');
             canvas = document.getElementById('canvas');
             ctx = canvas.getContext('2d');
             canvas.setAttribute('width', w);
             canvas.setAttribute('height', h)
+            // load file:
+
+
+        function convert(buffer) {
+        var blob = new Blob([buffer], {type: "image/jpg"});
+
+        var domURL = self.URL || self.webkitURL || self,
+            url = domURL.createObjectURL(blob),
+
+        img =  document.getElementById('img')
+        img.src = url;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function loopImages(){
+
+            for (let i=0; i<81 ; i++){
+                console.log(`${i}.jpg`)
+                fetch(`./img/${i}.jpg`, convert, alert);
+                await sleep(300);
+            }
+        }
+        loopImages();
+        // fetch("./testimg.jpg", convert, alert);
+        function fetch(url, callback, error) {
+
+        var xhr = new XMLHttpRequest();
+        try {
+            xhr.open("GET", url);
+            xhr.responseType = "arraybuffer";
+            xhr.onerror = function() {
+            error("Network error")
+            };
+            xhr.onload = function() {
+            if (xhr.status === 200) callback(xhr.response);
+            else error(xhr.statusText);
+            };
+            xhr.send();
+        } catch (err) {
+            error(err.message)
+        }
+        }
+            // document.getElementById('img').src = './testimg.jpg'
             // Wait until the video stream canvas play
             // video.addEventListener('canplay', function(e) {
             //     if (!isStreaming) {
@@ -226,15 +274,16 @@
         }
 
         //Request Animation Frame function
-        var sFilter = function() {
+        var sFilter = function() {  // need sFilter function
             // if (video.paused || video.ended) return;
 
             ctx.fillRect(0, 0, w, h);
-            ctx.drawImage(myimg, 0, 0, w, h);
+
+            ctx.drawImage(img, 0, 0, w, h);
 
             ncnn_nanodet();
 
-            // window.requestAnimationFrame(sFilter);
+            window.requestAnimationFrame(sFilter);
         }
 
     </script>

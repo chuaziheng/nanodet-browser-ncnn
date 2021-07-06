@@ -2,20 +2,32 @@
 var imgURL = '';
 var myimg = document.getElementById('img');
 var timeout = 1000000;
-var webcamState = false;
+var inferenceMethod ;
 
 // Set states
 function imageState(){
-    webcamState = false;
+    inferenceMethod = 'image';
 }
 
 function webcamState(){
-    webcamState = true;
+    inferenceMethod = 'webcam';
     document.getElementById('myForm').display = "none";
 }
 
+// Main code
+document.getElementById("webcamButton").addEventListener("click", function() {
+    // inferenceMethod  = 'image';
+    webcam();
+  });
+document.getElementById("imgButton").addEventListener("click", function() {
+    // inferenceMethod  = 'webcam';
+    image();
+  });
+
+
 // Image inferencing
-if (!webcamState) {
+// if (inferenceMethod == 'image') {
+function image() {
     console.log('IMAGE STATE');
     function requestFrame(){
         window.requestAnimationFrame(sFilter);  // it keeps
@@ -57,22 +69,22 @@ if (!webcamState) {
       }
 
       // This is the promise code, so this is the useful bit
-      function ensureFooIsSet(timeout) {
+      function ensureURLSet(timeout) {
         var start = Date.now();
-        return new Promise(waitForFoo); // set the promise object within the ensureFooIsSet object
+        return new Promise(waitForURL); // set the promise object within the ensureURLSet object
 
-        // waitForFoo makes the decision whether the condition is met
+        // waitForURL makes the decision whether the condition is met
         // or not met or the timeout has been exceeded which means
         // this promise will be rejected
-        function waitForFoo(resolve, reject) {
+        function waitForURL(resolve, reject) {
             if (imgURL)
                 resolve(imgURL);
             else if (timeout && (Date.now() - start) >= timeout)
                 reject(new Error("timeout"));
             else
-                setTimeout(waitForFoo.bind(this, resolve, reject), 30);
-        }  // END waitForFoo
-    }  // END ensureFooIsSet
+                setTimeout(waitForURL.bind(this, resolve, reject), 30);
+        }  // END waitForURL
+    }  // END ensureURLSet
 
     // Drag and drop stuff
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
@@ -240,7 +252,7 @@ if (!webcamState) {
         // console.log(imgURL);
 
         // This runs the promise code
-        ensureFooIsSet(timeout).then(function(){  // wait until image dropped, then run inference
+        ensureURLSet(timeout).then(function(){  // wait until image dropped, then run inference
             sFilter();
         });
 
@@ -315,7 +327,10 @@ if (!webcamState) {
 
     }
 
-} else{
+}
+
+// else if (inferenceMethod == 'webcam') {
+function webcam() {
     console.log("WEBCAM STATE");
     var Module = {};
 
@@ -501,6 +516,8 @@ if (!webcamState) {
     }
 
 }
+
+
 // function requestFrame(){
 //     window.requestAnimationFrame(sFilter);  // it keeps
 
@@ -541,22 +558,22 @@ if (!webcamState) {
 //   }
 
 //   // This is the promise code, so this is the useful bit
-//   function ensureFooIsSet(timeout) {
+//   function ensureURLSet(timeout) {
 //     var start = Date.now();
-//     return new Promise(waitForFoo); // set the promise object within the ensureFooIsSet object
+//     return new Promise(waitForURL); // set the promise object within the ensureURLSet object
 
-//     // waitForFoo makes the decision whether the condition is met
+//     // waitForURL makes the decision whether the condition is met
 //     // or not met or the timeout has been exceeded which means
 //     // this promise will be rejected
-//     function waitForFoo(resolve, reject) {
+//     function waitForURL(resolve, reject) {
 //         if (imgURL)
 //             resolve(imgURL);
 //         else if (timeout && (Date.now() - start) >= timeout)
 //             reject(new Error("timeout"));
 //         else
-//             setTimeout(waitForFoo.bind(this, resolve, reject), 30);
-//     }  // END waitForFoo
-// }  // END ensureFooIsSet
+//             setTimeout(waitForURL.bind(this, resolve, reject), 30);
+//     }  // END waitForURL
+// }  // END ensureURLSet
 
 // // Drag and drop stuff
 // document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
@@ -724,7 +741,7 @@ if (!webcamState) {
 //     // console.log(imgURL);
 
 //     // This runs the promise code
-//     ensureFooIsSet(timeout).then(function(){  // wait until image dropped, then run inference
+//     ensureURLSet(timeout).then(function(){  // wait until image dropped, then run inference
 // 	    sFilter();
 //     });
 

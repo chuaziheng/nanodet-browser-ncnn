@@ -1,3 +1,63 @@
+// global vars
+var imgURL = '';
+var myimg = document.getElementById('img');
+var timeout = 1000000;
+
+// functions
+
+function updateThumbnail(dropZoneElement, file) {
+    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+    // First time - remove the prompt
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    }
+
+    // First time - there is no thumbnail element, so lets create it
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("drop-zone__thumb");
+      dropZoneElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name;  //dataset exposes map of strings with an entry for each data-* attr
+
+    // Show thumbnail for image files
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const readerResult =  reader.result;
+        thumbnailElement.style.backgroundImage = `url('${readerResult}')`;  // reader.result base64 data url representing the img
+        imgURL = readerResult.toString()
+        myimg.src = imgURL;
+        console.log(imgURL);
+      };
+
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
+
+  // This is the promise code, so this is the useful bit
+  function ensureFooIsSet(timeout) {
+    var start = Date.now();
+    return new Promise(waitForFoo); // set the promise object within the ensureFooIsSet object
+
+    // waitForFoo makes the decision whether the condition is met
+    // or not met or the timeout has been exceeded which means
+    // this promise will be rejected
+    function waitForFoo(resolve, reject) {
+        if (imgURL)
+            resolve(imgURL);
+        else if (timeout && (Date.now() - start) >= timeout)
+            reject(new Error("timeout"));
+        else
+            setTimeout(waitForFoo.bind(this, resolve, reject), 30);
+    }  // END waitForFoo
+}  // END ensureFooIsSet
+
 // Drag and drop stuff
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");  // Element.closest()
@@ -25,7 +85,6 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 
     dropZoneElement.addEventListener("drop", (e) => {
       e.preventDefault();
-
       if (e.dataTransfer.files.length) {
         inputElement.files = e.dataTransfer.files;
         updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
@@ -41,40 +100,7 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
    * @param {HTMLElement} dropZoneElement
    * @param {File} file
    */
-  function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
-    // First time - remove the prompt
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-      dropZoneElement.querySelector(".drop-zone__prompt").remove();
-    }
-
-    // First time - there is no thumbnail element, so lets create it
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("drop-zone__thumb");
-      dropZoneElement.appendChild(thumbnailElement);
-    }
-
-    thumbnailElement.dataset.label = file.name;  //dataset exposes map of strings with an entry for each data-* attr
-
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const readerResult =  reader.result;
-        thumbnailElement.style.backgroundImage = `url('${readerResult}')`;  // reader.result base64 data url representing the img
-        img =  document.getElementById('img');
-        img.src =  readerResult.toString();
-        console.log(readerResult.toString());
-      };
-
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
 
 // Original repo stuff
 
@@ -151,6 +177,7 @@ var h = 480;
 var dst = null;
 var resultarray = null;
 var resultbuffer = null;
+
 window.addEventListener('DOMContentLoaded', function() {
     // var isStreaming = false;
     // switchcamerabtn = document.getElementById('switch-camera-btn');
@@ -158,8 +185,6 @@ window.addEventListener('DOMContentLoaded', function() {
     ctx = canvas.getContext('2d');
     canvas.setAttribute('width', w);
     canvas.setAttribute('height', h);
-
-
 
     // document.getElementById('img').src = './testimg.jpg'
     // Wait until the video stream canvas play
@@ -195,8 +220,14 @@ window.addEventListener('DOMContentLoaded', function() {
 	dst = _malloc(d.length);
 
 	//console.log("What " + d.length);
+    // console.log('Waiting for URL');
+    // console.log(imgURL);
 
-	sFilter();
+    // This runs the promise code
+    ensureFooIsSet(timeout).then(function(){  // wait until image dropped, then run inference
+	    sFilter();
+    });
+
 	}
     // });
 
@@ -221,21 +252,21 @@ window.addEventListener('DOMContentLoaded', function() {
 	capture();
 });
 
-function capture() {
-    var constraints = { audio: false, video: { width: 640, height: 480, facingMode: shouldFaceUser ? 'user' : 'environment' } };
-    navigator.mediaDevices.getUserMedia(constraints)
-        .then(function(mediaStream) {
-            var video = document.querySelector('video');
-            stream = mediaStream;
-            video.srcObject = mediaStream;
-            video.onloadedmetadata = function(e) {
-                video.play();
-            };
-        })
-        .catch(function(err) {
-            console.log(err.message);
-        });
-}
+// function capture() {
+//     var constraints = { audio: false, video: { width: 640, height: 480, facingMode: shouldFaceUser ? 'user' : 'environment' } };
+//     navigator.mediaDevices.getUserMedia(constraints)
+//         .then(function(mediaStream) {
+//             var video = document.querySelector('video');
+//             stream = mediaStream;
+//             video.srcObject = mediaStream;
+//             video.onloadedmetadata = function(e) {
+//                 video.play();
+//             };
+//         })
+//         .catch(function(err) {
+//             console.log(err.message);
+//         });
+// }
 
 
 function ncnn_nanodet() {
@@ -264,4 +295,6 @@ var sFilter = function() {  // need sFilter function
 
     ncnn_nanodet();
     // window.requestAnimationFrame(sFilter);  // it keeps
+
+
 }

@@ -27,7 +27,6 @@
                     <canvas id="canvas" width="640"></canvas>
 
                     <video id="video" playsinline autoplay></video>
-                    <img id="img" src=''/>
 
 
                 </div>
@@ -43,7 +42,7 @@
 
                 <div class="col">
                     <img id="img" src=''/>
-                    <form class="form" id="myForm" enctype="multipart/form-data">
+                    <form  class="form d-none" id="myForm" enctype="multipart/form-data">
                         <div class="drop-zone">
                             <span class="drop-zone__prompt">Drop file here or click to upload</span>
                             <input type="file" name="myFile" id="myFile" class="drop-zone__input">
@@ -52,7 +51,7 @@
                 </div>
 
                 <div class="col">
-                    <button id="go" onclick="requestFrame()"> Go </button>
+                    <button class="d-none" id="predict" > Predict! </button>
                 </div>
 
             </div>

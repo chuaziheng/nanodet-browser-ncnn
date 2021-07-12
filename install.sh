@@ -15,16 +15,19 @@ cd ../..
 echo "emptying assets folder"
 rm -rf ./assets/
 mkdir assets
+mkdir onnx_models
 
 echo "converting into onnx ..."
-python3 ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m.yml --model_path ./models/nanodetmodel.pth
+python3 ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m-416.yml --model_path ./models/custom5_model_416.pth --out_path ./onnx_models/custom5-416.onnx
 
 echo "simplifying onnx ..."
-python3 -m onnxsim nanodet.onnx nanodet_simple.onnx
+python3 -m onnxsim ./onnx_models/custom5-416.onnx ./onnx_models/custom5-416-simple.onnx
 
 echo "generating NCNN format..."
-cd ./ncnn/build/tools/onnx/ && ./onnx2ncnn ../../../../nanodet_simple.onnx ../../../../assets/nanodet-m.param ../../../../assets/nanodet-m.bin
+cd ./ncnn/build/tools/onnx/ && ./onnx2ncnn ../../../../onnx_models/custom5-416-simple.onnx ../../../../assets/nanodet-m-416.param ../../../../assets/nanodet-m-416.bin
+
 cd ../../../..
+
 
 echo "installing emsdk..."
 cd emsdk
@@ -50,8 +53,9 @@ make -j4
 cmake -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DWASM_FEATURE=simd-threads ..
 make -j4
 
-echo "moving files up to parent directory"
-find . -maxdepth 1 -exec mv {} .. \;
+echo "copy files up to parent directory"
+cp ./nanodet-simd-threads.data ../nanodet-simd-threads.data
+# find ./nanodet-simd-threads.data -maxdepth 1 -exec mv {} .. \;
 echo "running http-server"
 cd ..
 http-server

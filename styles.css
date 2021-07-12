@@ -4,8 +4,18 @@ video {
 }
 canvas {
 	border: 1px solid black;
+    margin-bottom: 5px;
 }
 
+nav{
+    margin-bottom: 50px;
+
+}
+.navbar-brand{
+    font-size: 1.8em;
+    text-align: center;
+
+}
 #img {
 	margin:15px;
     display:none;
@@ -58,3 +68,9 @@ canvas {
     font-size: 14px;
     text-align: center;
 }
+
+#switch-camera-btn{
+    display: none;
+}
+
+

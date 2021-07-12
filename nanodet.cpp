@@ -384,7 +384,9 @@ int NanoDet::draw(cv::Mat& rgba, const std::vector<Object>& objects)
         // "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
         // "hair drier", "toothbrush"
 // -------------------------------------------------------- Input custom class names here -----------------------------------------------------
-        "hands"
+        // "hands"
+        // "bottle","computer mouse","human face", "human hand","mobile phone"
+        "human hand","human face","bottle", "mobile phone","computer mouse"
 // --------------------------------------------------------------------------------------------------------------------------------------------
     };
 

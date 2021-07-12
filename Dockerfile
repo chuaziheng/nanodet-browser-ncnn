@@ -37,6 +37,9 @@ COPY nanodet/ /usr/src/app/nanodet/
 COPY nanodet.cpp /usr/src/app/nanodet.cpp
 COPY nanodet.h /usr/src/app/nanodet.h
 COPY nanodetncnn.cpp /usr/src/app/nanodetncnn.cpp
+COPY index.html /usr/src/app/index.html
+COPY main.js /usr/src/app/main.js
+COPY styles.css /usr/src/app/styles.css
 
 # Dev Debugging purposes
 RUN apt-get -y install vim

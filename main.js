@@ -88,6 +88,7 @@ window.addEventListener('DOMContentLoaded', function() {
         // Hide
         $('#myForm').addClass('d-none');
         $("#img").addClass('d-none');
+        $("#predict").addClass('d-none');
         imgURL = '';
         // Display
         $("#video").removeClass('d-none');
@@ -251,7 +252,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
                 imgURL = readerResult.toString()
                 myimg.src = imgURL;
-                // console.log(imgURL);
+                // console.log(imgURL.slice(0,150));
             };
 
             } else {
@@ -286,8 +287,11 @@ window.addEventListener('DOMContentLoaded', function() {
             });
 
             inputElement.addEventListener("change", (e) => {
+            // console.log('file count');
+            // console.log(inputElement.files[0]);
             if (inputElement.files.length) {
                 updateThumbnail(dropZoneElement, inputElement.files[0]);  // supports one file upload
+
             }
             });
 
@@ -366,7 +370,6 @@ window.addEventListener('DOMContentLoaded', function() {
         var sFilter = function() {  // need sFilter function
 
             ctx.fillRect(0, 0, w, h);
-
             ctx.drawImage(myimg, 0, 0, w, h);
 
             ncnn_nanodet();
@@ -374,7 +377,7 @@ window.addEventListener('DOMContentLoaded', function() {
             document.getElementById("predict").addEventListener("click", function() {
                 console.log('request frame');
                 window.requestAnimationFrame(sFilter);
-        });
+        }, {once : true});
 
 
         }

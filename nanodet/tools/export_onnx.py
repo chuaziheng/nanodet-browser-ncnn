@@ -33,7 +33,7 @@ def main(config, model_path, output_path, input_shape=(320, 320)):
                       output_path,
                       verbose=True,
                       keep_initializers_as_inputs=True,
-                      opset_version=10,
+                      opset_version=10,  # use 10, although default is 11 (which impacts accuracy)
                       output_names=output_names)
     logger.log('finished exporting onnx ')
 

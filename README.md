@@ -23,6 +23,8 @@ docker run -dit -p 8080:8080 --name ncnn-browser --mount type=bind,source="$(pwd
 1. Similar steps to docker version above
 2. Move .data up to parent dir ``` find nanodet-simd-threads.data -maxdepth 1 -exec mv {} .. \;```
 
+
+
 ## PyTorch to Tensorflow-JS
 
 <!-- ```
@@ -34,32 +36,4 @@ onnx-tf convert --infile ./onnx_models/nanodet_m_ckpt-simplified.onnx --outdir m
 
 tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/saved-m-ckpt models/graph-m-ckpt
 ``` -->
-```
-python3 ./nanodet/tools/export_onnx.py --cfg_path ./nanodet/config/nanodet-m-416.yml --model_path ./models/custom5-416.pth --out_path ./onnx_models/custom5-416.onnx
 
-python -m onnxsim ./onnx_models/custom5-416.onnx ./onnx_models/custom5-416-simplified.onnx
-
-onnx-tf convert --infile ./onnx_models/custom5-416-simplified.onnx --outdir models/custom5-416
-
-tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/custom5-416 models/graph-custom5-416
-```
-<!-- ```
-python ./tools/export_onnx.py --cfg_path ./config/nanodet-m.yml --model_path ./models/nanodetmodel.pth --out_path ./onnx_models/nanodet_custom.onnx
-
-python -m onnxsim ./onnx_models/nanodet_custom.onnx ./onnx_models/nanodet_custom-simplified.onnx
-
-onnx-tf convert --infile ./onnx_models/nanodet_custom-simplified.onnx --outdir models/saved-custom
-
-tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/saved-custom models/graph-custom
-``` -->
-
-<!-- 416 custom -->
-<!-- ```
-python ./tools/export_onnx.py --cfg_path ./config/nanodet-m-416.yml --model_path ./models/nanodet_m_416.ckpt --out_path ./onnx_models/nanodet_custom_416.onnx
-
-python -m onnxsim ./onnx_models/nanodet_custom_416.onnx ./onnx_models/nanodet_custom_416-simplified.onnx
-
-onnx-tf convert --infile ./onnx_models/nanodet_custom_416-simplified.onnx --outdir models/saved-custom-416
-
-tensorflowjs_converter --input_format tf_saved_model --output_format tfjs_graph_model --strip_debug_ops=False --weight_shard_size_bytes 8388608 models/saved-custom-416 models/graph-416
-``` -->

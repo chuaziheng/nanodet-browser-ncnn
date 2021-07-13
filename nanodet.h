@@ -34,7 +34,7 @@ public:
 
 //----------------------------- EDIT Confidence and NMS threshold ------------------------------------------------------------------------------------------------
 
-    int detect(const cv::Mat& rgba, std::vector<Object>& objects, float prob_threshold = 0.5f, float nms_threshold = 0.5f);
+    int detect(const cv::Mat& rgba, std::vector<Object>& objects, float prob_threshold = 0.4f, float nms_threshold = 0.5f);
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

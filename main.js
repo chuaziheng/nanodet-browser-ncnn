@@ -1,4 +1,3 @@
-
 // global vars
 var imgURL = '';
 var myimg = document.getElementById('img');

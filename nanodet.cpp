@@ -387,6 +387,7 @@ int NanoDet::draw(cv::Mat& rgba, const std::vector<Object>& objects)
         // "hands"
         // "bottle","computer mouse","human face", "human hand","mobile phone"
         "human hand","human face","bottle", "mobile phone","computer mouse"
+        // "Nauplii", "Shell"
 // --------------------------------------------------------------------------------------------------------------------------------------------
     };
 
@@ -420,7 +421,7 @@ int NanoDet::draw(cv::Mat& rgba, const std::vector<Object>& objects)
         char buffer[256];
 //         fprintf(stderr, "%d = %.5f at %.2f %.2f %.2f x %.2f\n", obj.label, obj.prob,
 //                 obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height);
-        sprintf(buffer, " %d %f %f %f %f %f",  (obj.label + 1),  obj.prob, obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height);
+        sprintf(buffer, " %d %f %f %f %f %f",  (obj.label + 1),  obj.prob, obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height);  // x, y, w, h
 
         std::cout << buffer << std::endl; // will be passed to nanodet-simd-threads.js
 

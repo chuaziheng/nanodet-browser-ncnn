@@ -36,6 +36,7 @@ nav{
     color: lightgray;
     border: 4px dashed gray;
     border-radius: 10px;
+    margin: 20px;
   }
 
 .drop-zone--over {

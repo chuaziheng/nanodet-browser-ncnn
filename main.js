@@ -206,6 +206,11 @@ window.addEventListener('DOMContentLoaded', function() {
 // IMAGE INFERENCING ###############################################################################################
 
     document.getElementById("imgButton").addEventListener("click", function() {
+        var w = 1000;
+        var h = 1000;
+        var img_w = w;
+        var img_h = h;
+        var dst = null;
         console.log('IMAGE STATE');
         if (isStreaming){
             stream.getTracks().forEach(t => {
@@ -277,6 +282,32 @@ window.addEventListener('DOMContentLoaded', function() {
             }  // END waitForURL
         }  // END ensureURLSet
 
+        function resizeImage(img_w, img_h) {
+            if (img_w > w && img_h > h){
+                if (img_w >= img_h) {
+                    img_h = img_h / (img_w / w);
+                    img_w = w;
+                    console.log('width bigger', img_w, img_h);
+
+                } else {
+                    img_w = img_w / (img_h / h);
+                    img_h = h;
+                    console.log('height bigger', img_w, img_h);
+
+                }
+            } else if (img_w >= w){
+                img_h = img_h / (img_w / w);
+                img_w = w;
+                console.log('width too large', w, img_h);
+            } else if (img_h >= h){
+                img_w = img_w / (img_h / h);
+                img_h = h;
+                console.log('height too large', img_w, h);
+            }
+            img_w = Math.floor(img_w);
+            img_h = Math.floor(img_h);
+            return {img_w , img_h};
+        }
         // Drag and drop stuff
         document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
             const dropZoneElement = inputElement.closest(".drop-zone");  // Element.closest()
@@ -322,8 +353,19 @@ window.addEventListener('DOMContentLoaded', function() {
             canvas.setAttribute('height', h);
 
 
+        // This runs the promise code
+        ensureURLSet(timeout).then(function(){
             //Setup image memory
-            var id = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            // img_w = myimg.width;
+            // img_h = myimg.height;
+            resized_obj = resizeImage(myimg.width, myimg.height);
+            img_w = resized_obj.img_w;
+            img_h = resized_obj.img_h;
+            console.log(resized_obj);
+            console.log("resized",img_w, img_h);
+
+
+            var id = ctx.getImageData(0, 0, img_w, img_h);
             var d = id.data;
 
             if (wasmModuleLoaded) {
@@ -335,30 +377,30 @@ window.addEventListener('DOMContentLoaded', function() {
             function mallocAndCallSFilter() {
             if (dst != null)
             {
+                console.log('dst not null');
                 _free(dst);
                 dst = null;
             }
 
             dst = _malloc(d.length);
 
-            // This runs the promise code
-            ensureURLSet(timeout).then(function(){  // wait until image dropped, then run inference
-                sFilter();
-            });
+            // wait until image dropped, then run inference
+            sFilter();
+
 
             }
 
-
+        });
         function ncnn_nanodet() {
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
 
-            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var imageData = ctx.getImageData(0, 0, img_w, img_h);
             var data = imageData.data;
 
             HEAPU8.set(data, dst);
 
-            _nanodet_ncnn(dst, canvas.width, canvas.height);
+            _nanodet_ncnn(dst, img_w, img_h);
 
             var result = HEAPU8.subarray(dst, dst + data.length);
             imageData.data.set(result);
@@ -369,16 +411,56 @@ window.addEventListener('DOMContentLoaded', function() {
         var sFilter = function() {  // need sFilter function
 
             ctx.fillRect(0, 0, w, h);
-            ctx.drawImage(myimg, 0, 0, w, h);
+
+            ctx.drawImage(myimg, 0, 0, img_w, img_h);
 
             ncnn_nanodet();
 
             document.getElementById("predict").addEventListener("click", function() {
-                console.log('request frame');
+                resized_obj = resizeImage(myimg.width, myimg.height);
+                img_w = resized_obj.img_w;
+                img_h = resized_obj.img_h;
+                var id = ctx.getImageData(0, 0, img_w, img_h);
+                var d = id.data;
+                console.log(dst);
+                if (dst != null)
+                {
+                    console.log('dst not null');
+                    _free(dst);
+                    dst = null;
+                }
+
+                dst = _malloc(d.length);
                 window.requestAnimationFrame(sFilter);
+
         }, {once : true});
-
-
         }
+
+        // var predictNextImage = function(){
+
+        //     var id = ctx.getImageData(0, 0, img_w, img_h);
+        //     console.log('image size',img_w,img_h );
+        //     var d = id.data;
+
+        //     _free(dst);
+        //     dst = null;
+        //     dst = _malloc(d.length);
+
+        //     // wait until image dropped, then run inference
+        //     ctx.fillRect(0, 0, w, h);
+
+        //     resized_obj = resizeImage(myimg.width, myimg.height);
+        //     img_w = resized_obj.img_w;
+        //     img_h = resized_obj.img_h;
+        //     ctx.drawImage(myimg, 0, 0, img_w, img_h);
+
+        //     ncnn_nanodet();
+        //     document.getElementById("predict").addEventListener("click", function() {
+        //         console.log('request frame');
+        //         window.requestAnimationFrame(predictNextImage);
+        // }, {once : true});
+
+        // }
+
     });
 });

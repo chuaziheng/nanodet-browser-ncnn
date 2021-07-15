@@ -33,6 +33,9 @@ RUN npm install -g http-server
 RUN git clone https://github.com/nihui/ncnn-webassembly-nanodet .
 RUN git clone https://github.com/emscripten-core/emsdk.git
 
+# Dev Debugging purposes
+RUN apt-get -y install vim
+
 COPY nanodet/ /usr/src/app/nanodet/
 COPY nanodet.cpp /usr/src/app/nanodet.cpp
 COPY nanodet.h /usr/src/app/nanodet.h
@@ -41,8 +44,7 @@ COPY index.html /usr/src/app/index.html
 COPY main.js /usr/src/app/main.js
 COPY styles.css /usr/src/app/styles.css
 
-# Dev Debugging purposes
-RUN apt-get -y install vim
+
 
 # ENTRYPOINT ["sh", "./install.sh"]
 COPY install.sh/ install.sh

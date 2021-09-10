@@ -54,7 +54,8 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/E
 make -j4
 
 echo "copy files up to parent directory"
-cp ./nanodet-simd-threads.data ../nanodet-simd-threads.data
+cp ./*.data ../*.data
+# cp ./nanodet-simd-threads.data ../nanodet-simd-threads.data
 # find ./nanodet-simd-threads.data -maxdepth 1 -exec mv {} .. \;
 echo "running http-server"
 cd ..

@@ -34,7 +34,7 @@ RUN git clone https://github.com/nihui/ncnn-webassembly-nanodet .
 RUN git clone https://github.com/emscripten-core/emsdk.git
 
 # Dev Debugging purposes
-RUN apt-get -y install vim
+# RUN apt-get -y install vim
 
 COPY nanodet/ /usr/src/app/nanodet/
 COPY nanodet.cpp /usr/src/app/nanodet.cpp

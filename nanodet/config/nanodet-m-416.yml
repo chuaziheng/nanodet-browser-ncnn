@@ -22,7 +22,7 @@ model:
       num_outs: 3
     head:
       name: NanoDetHead
-      num_classes: 1
+      num_classes: 5
       input_channel: 96
       feat_channels: 96
       stacked_convs: 2
@@ -101,7 +101,9 @@ evaluator:
 log:
   interval: 10
 
-class_names: ['hands']
+# class_names: ['hands']
+class_names: ["human hand","human face","bottle", "mobile phone","computer mouse"]
+# class_names: ["bottle","computer mouse","human face", "human hand","mobile phone"]
 # class_names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
 #               'train', 'truck', 'boat', 'traffic_light', 'fire_hydrant',
 #               'stop_sign', 'parking_meter', 'bench', 'bird', 'cat', 'dog',

@@ -1,10 +1,10 @@
 ##  [Browser] Nanodet Real-time inferencing (NCNN) Dockerized
 
-Demo Link: https://chuaziheng.github.io/nanodet-wasm-ncnn/
+Model deployment pipeline that automates trained Nanodet PyTorch object detection model into NCNN format, and deployed to a simple web interface, powered by WebAssembly backend.
 
 Proof-of-Concept object detection project: Detects 5 classes ```['human face', 'human hand'. 'computer mouse', 'bottle', 'mobile phone'] ```
 
-Simple web interface used to deploy Nanodet lightweight object detection model in NCNN framework, powered by WebAssembly backend.
+Demo Link: https://chuaziheng.github.io/nanodet-wasm-ncnn/
 
 Functionalities include:
 1. Real-time webcam inferencing

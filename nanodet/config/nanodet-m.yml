@@ -97,6 +97,9 @@ log:
   interval: 10
 
 class_names: ["hands"]
+# class_names: ["Nauplii","Shell"]
+# class_names: ["human hand","human face","bottle", "mobile phone","computer mouse"]
+
 # class_names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
 #               'train', 'truck', 'boat', 'traffic_light', 'fire_hydrant',
 #               'stop_sign', 'parking_meter', 'bench', 'bird', 'cat', 'dog',
